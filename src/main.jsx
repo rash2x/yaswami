@@ -6,6 +6,7 @@ import {telegram} from "./telegram.js";
 
 const theme = createTheme({
   palette: {
+    mode: telegram.color_scheme,
     primary: {
       main: telegram.themeParams.button_color
     },
@@ -14,8 +15,8 @@ const theme = createTheme({
       secondary: telegram.themeParams.hint_color
     },
     background: {
-      paper: telegram.themeParams.bg_color,
-      default: telegram.themeParams.secondary_bg_color
+      paper: telegram.themeParams.secondary_bg_color,
+      default: telegram.themeParams.bg_color
     }
   }
 });
