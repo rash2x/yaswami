@@ -3,7 +3,7 @@ import {telegram} from "./telegram.js";
 import {Button} from "@mui/material";
 
 function App() {
-  const {user, chat} = telegram.initDataUnsafe.user;
+  const {user, chat} = telegram.initDataUnsafe;
   useEffect(() => {
     telegram.ready();
   })
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <img src={user.photo_url} alt="photo"/>
+      {user.photo_url && <img src={user.photo_url} alt="photo"/>}
       <p>Привет {user.username}</p>
       Расшифруйте особенности вашего тела, узнайте что на вас влияет, какая у вас стратегия жизни, какие камни вам
       подходят и многое другое
