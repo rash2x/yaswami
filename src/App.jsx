@@ -1,23 +1,23 @@
 import {useEffect, useState} from 'react'
 import {telegram} from "./telegram.js";
-import {Button} from "@mui/material";
+import {Button, Card, Typography} from "@mui/material";
+import Event from "./components/Event.jsx";
+import Events from "./components/Events.jsx";
 
 function App() {
-  const {user, chat} = telegram.initDataUnsafe;
+
+  const [user, setUser] = useState({
+    username: ''
+  });
+
   useEffect(() => {
     telegram.ready();
-  })
-
-  console.log(telegram.initData);
-  console.log(user, chat);
+    setUser(telegram.initDataUnsafe);
+  });
 
   return (
     <div className="App">
-      {user.photo_url && <img src={user.photo_url} alt="photo"/>}
-      <p>Привет {user.username}</p>
-      Расшифруйте особенности вашего тела, узнайте что на вас влияет, какая у вас стратегия жизни, какие камни вам
-      подходят и многое другое
-      <Button color="primary">Расшифровать</Button>
+      <Events />
     </div>
   )
 }

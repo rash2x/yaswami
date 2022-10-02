@@ -4,7 +4,7 @@ import App from './App'
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import {telegram} from "./telegram.js";
 
-const theme = createTheme({
+const theme = createTheme(telegram.initData !== '' && {
   palette: {
     mode: telegram.color_scheme,
     primary: {
