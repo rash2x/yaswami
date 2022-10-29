@@ -1,4 +1,4 @@
-import {Telegraf} from "telegraf";
+const { Telegraf } = require('telegraf');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const web_link = "https://golden-flan-135f29.netlify.app/";
