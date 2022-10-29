@@ -13,4 +13,12 @@ bot.start((ctx) => {
   })
 });
 
-bot.launch();
+exports.handler = async (event) => {
+  try {
+    await bot.handleUpdate(JSON.parse(event.body));
+    return {statusCode: 200};
+  } catch (e) {
+    return {statusCode: 400};
+  }
+};
+
