@@ -38,10 +38,8 @@ bot.start(async (ctx) => {
 
 bot.on('contact', async (ctx) => {
   const {from, contact} = ctx.message;
-  
-  const photos = await ctx.telegram.getUserProfilePhotos(from.id);
-  console.log(photos);
-  const photoFile = await ctx.telegram.getFile(photos[0].file_id);
+  const userPhotos = await ctx.telegram.getUserProfilePhotos(from.id);
+  const photoFile = await ctx.telegram.getFile(userPhotos.photos[0][0].file_id);
   console.log(photoFile);
 
   const fields = {
