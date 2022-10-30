@@ -19,7 +19,7 @@ bot.start(async (ctx) => {
 
   console.log(user);
 
-  if(!user) {
+  if(!user || (Array.isArray(user) && user.length === 0)) {
     return ctx.reply('Начинаем! Давай зарегистрируемся чтобы запустить бота. Помни, нажимая кнопку Стать Свами, ты соглашаешься, что начинаешь идти по пути познания себя!', {
       reply_markup: {
         keyboard: [
