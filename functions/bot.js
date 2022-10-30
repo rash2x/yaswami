@@ -13,10 +13,9 @@ bot.start((ctx) => {
         }, {
           text: 'Стать Свами',
           login_url: {
-            url: 'https://yaswami.com',
+            url: 'https://yaswami_bot.t.me',
             forward_text: 'Стать Свами',
             bot_username: 'yaswami_bot',
-            request_write_access: 'true'
           }
         }],
       ],
