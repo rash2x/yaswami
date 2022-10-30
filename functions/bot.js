@@ -4,9 +4,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const web_link = "https://golden-flan-135f29-6b0ef8.netlify.live/";
 
 bot.start((ctx) => {
-  return ctx.reply("Расшифруйте особенности вашего тела, узнайте что на вас влияет, какая у вас стратегия жизни, какие камни вам подходят и многое другое", {
+  return ctx.reply("Найди нужную практику, посмотрите расписание и забронируйте место", {
     reply_markup: {
-      keyboard: [[{text: "События", web_app: {url: web_link}}]],
+      inline_keyboard: [[{text: "Запустить приложение", web_app: {url: web_link}}]],
     },
   })
 });
