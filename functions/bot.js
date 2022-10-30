@@ -7,20 +7,18 @@ bot.start((ctx) => {
   return ctx.reply('Найди нужную практику, узнай расписание и забронируйте место', {
     reply_markup: {
       inline_keyboard: [
-        [
-          {
-            text: 'Запустить приложение',
-            web_app: {url: web_link}
-          }, {
+        [{
+          text: 'Запустить приложение',
+          web_app: {url: web_link}
+        }, {
           text: 'Стать Свами',
           login_url: {
-            url: 'https://yaswami_bot.t.me',
+            url: 'https://yaswami.com',
             forward_text: 'Стать Свами',
             bot_username: 'yaswami_bot',
             request_write_access: true
           }
-        }
-        ],
+        }],
       ],
     },
   });
