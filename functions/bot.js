@@ -2,29 +2,27 @@ const {Telegraf} = require('telegraf');
 const Airtable = require('airtable');
 
 Airtable.configure({
-  endpointUrl: 'https://api.airtable.com', apiKey: process.env.AIRTABLE_TOKEN
+  apiKey: process.env.AIRTABLE_TOKEN
 });
 
-const airtable = Airtable.base('appAB6mLnImrAFBWa');
+const base = Airtable.base('appAB6mLnImrAFBWa');
+const tableMembers = base('Members');
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const membersTable = airtable('Members');
+
+console.log(base);
 
 bot.start(async (ctx) => {
-  console.log(ctx);
-  console.log(ctx.update.message.from);
-  console.log(membersTable);
-
-  const user = await membersTable.select({
+  const user = await tableMembers.select({
     maxRecords: 1, filterByFormula: `{Id}='${ctx.update.message.from.id}'`
   }).firstPage();
 
   console.log(user);
 
   if (!user || (Array.isArray(user) && user.length === 0)) {
-    return ctx.reply('Начинаем! Давай зарегистрируемся чтобы запустить бота. Помни, нажимая кнопку Стать Свами, ты соглашаешься, что начинаешь идти по пути познания себя!', {
+    return ctx.reply('Начинаем! Давай зарегистрируемся чтобы запустить бота. Помни, ты соглашаешься начать идти по пути познания себя!', {
       reply_markup: {
         keyboard: [[{
-          text: 'Стать Свами 🧘', request_contact: true
+          text: 'Я с вами 🧘', request_contact: true
         }]], one_time_keyboard: true,
       },
     });
@@ -47,10 +45,10 @@ bot.on('contact', async (ctx) => {
     'PhotoUrl': photoFile.file_path
   };
 
-  console.log(membersTable);
+  console.log(tableMembers);
   console.log(fields);
 
-  membersTable.create([{
+  tableMembers.create([{
     'fields': fields
   }])
     .catch(error => console.log(error))
