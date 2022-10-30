@@ -12,11 +12,11 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const web_link = 'https://golden-flan-135f29-6b0ef8.netlify.live/';
 
 bot.start((ctx) => {
+  const membersTable = airtable('Members');
   console.log(ctx);
-  console.log(members);
-  const members = airtable('Members');
-  // await members.select({maxRecords: 1, filterByFormula: `NOT({Telegram} = '${}')`}).firstPage();
+  console.log(membersTable);
 
+  // await members.select({maxRecords: 1, filterByFormula: `NOT({Telegram} = '${}')`}).firstPage();
   return ctx.reply('Найди нужную практику, узнай расписание и забронируйте место', {
     reply_markup: {
       inline_keyboard: [
