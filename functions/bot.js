@@ -16,7 +16,7 @@ bot.start((ctx) => {
             url: 'https://yaswami.com',
             forward_text: 'Стать Свами',
             bot_username: 'yaswami_bot',
-            request_write_access: true
+            request_write_access: 'true'
           }
         }],
       ],
