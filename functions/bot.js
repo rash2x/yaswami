@@ -1,7 +1,14 @@
 const {Telegraf} = require('telegraf');
-const airtable = require('../src/airtable');
+const Airtable = require('airtable');
 
+Airtable.configure({
+  endpointUrl: 'https://api.airtable.com',
+  apiKey: process.env.AIRTABLE_TOKEN
+});
+
+const airtable = Airtable.base('appAB6mLnImrAFBWa');
 const bot = new Telegraf(process.env.BOT_TOKEN);
+
 const web_link = 'https://golden-flan-135f29-6b0ef8.netlify.live/';
 
 bot.start((ctx) => {
