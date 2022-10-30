@@ -10,12 +10,12 @@ const airtable = Airtable.base('appAB6mLnImrAFBWa');
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const membersTable = airtable('Members');
 
-bot.start((ctx) => {
+bot.start(async (ctx) => {
   console.log(ctx);
   console.log(ctx.update.message.from);
   console.log(membersTable);
 
-  const user = membersTable.select({maxRecords: 1, filterByFormula: `{Id}='${ctx.update.message.from.id}'`}).firstPage();
+  const user = await membersTable.select({maxRecords: 1, filterByFormula: `{Id}='${ctx.update.message.from.id}'`}).firstPage();
 
   console.log(user);
 
