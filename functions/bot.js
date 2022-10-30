@@ -2,8 +2,7 @@ const {Telegraf} = require('telegraf');
 const Airtable = require('airtable');
 
 Airtable.configure({
-  endpointUrl: 'https://api.airtable.com',
-  apiKey: process.env.AIRTABLE_TOKEN
+  endpointUrl: 'https://api.airtable.com', apiKey: process.env.AIRTABLE_TOKEN
 });
 
 const airtable = Airtable.base('appAB6mLnImrAFBWa');
@@ -15,20 +14,18 @@ bot.start(async (ctx) => {
   console.log(ctx.update.message.from);
   console.log(membersTable);
 
-  const user = await membersTable.select({maxRecords: 1, filterByFormula: `{Id}='${ctx.update.message.from.id}'`}).firstPage();
+  const user = await membersTable.select({
+    maxRecords: 1, filterByFormula: `{Id}='${ctx.update.message.from.id}'`
+  }).firstPage();
 
   console.log(user);
 
-  if(!user || (Array.isArray(user) && user.length === 0)) {
+  if (!user || (Array.isArray(user) && user.length === 0)) {
     return ctx.reply('Начинаем! Давай зарегистрируемся чтобы запустить бота. Помни, нажимая кнопку Стать Свами, ты соглашаешься, что начинаешь идти по пути познания себя!', {
       reply_markup: {
-        keyboard: [
-          [{
-            text: 'Стать Свами 🧘',
-            request_contact: true
-          }]
-        ],
-        one_time_keyboard: true,
+        keyboard: [[{
+          text: 'Стать Свами 🧘', request_contact: true
+        }]], one_time_keyboard: true,
       },
     });
   } else {
@@ -50,18 +47,18 @@ bot.on('contact', async (ctx) => {
     'PhotoUrl': photoFile.file_path
   };
 
+  console.log(membersTable);
   console.log(fields);
 
-  await membersTable.create([{fields}], (err, records) => {
-    if (err) {
-      console.error(err);
-      return;
-    }
-
-    records.forEach(function (record) {
-      console.log(record.getId());
+  membersTable.create([{
+    'fields': fields
+  }])
+    .catch(error => console.log(error))
+    .then((records) => {
+      records.forEach(function (record) {
+        console.log(record.getId());
+      });
     });
-  });
 
 });
 
@@ -71,8 +68,8 @@ exports.handler = async (event) => {
       console.log('Received an update from Telegram!', event.body);
     });
     return {statusCode: 200};
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    console.log(error);
     return {statusCode: 400};
   }
 };
